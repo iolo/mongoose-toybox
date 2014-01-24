@@ -1,4 +1,4 @@
 mongoose-toybox
 ===============
 
-My Own Extra Stuff for [mongoose](http://mongoosejs.com).
+My Own Extra Stuff for [Mongoose](http://mongoosejs.com).

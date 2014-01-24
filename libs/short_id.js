@@ -1,9 +1,9 @@
 'use strict';
 
 var
-  mongoose = require('mongoose'),
-  debug = require('debug')('mongoose-toybox:short_id'),
-  DEBUG = debug.enabled;
+    mongoose = require('mongoose'),
+    debug = require('debug')('mongoose-toybox:short_id'),
+    DEBUG = debug.enabled;
 
 /**
  * make short and url safe string from mongodb ObjectId.
@@ -12,7 +12,7 @@ var
  * @return {String}
  */
 function encodeObjectId(str) {
-  return new Buffer(String(str), 'hex').toString('base64').replace('+', '-').replace('/', '_');
+    return new Buffer(String(str), 'hex').toString('base64').replace('+', '-').replace('/', '_');
 }
 
 /**
@@ -22,7 +22,7 @@ function encodeObjectId(str) {
  * @return {String} mongodb ObjectId
  */
 function decodeObjectId(str) {
-  return mongoose.Types.ObjectId.createFromHexString(new Buffer(str.replace('-', '+').replace('_', '/'), 'base64').toString('hex'));
+    return mongoose.Types.ObjectId.createFromHexString(new Buffer(str.replace('-', '+').replace('_', '/'), 'base64').toString('hex'));
 }
 
 /**
@@ -32,19 +32,19 @@ function decodeObjectId(str) {
  * @param {{real:string, virtual:string}} [options={}]
  */
 function mongooseShortId(schema, options) {
-  options = options || {};
-  var realPath = options.real || '_id';
-  var virtualPath = options.virtual || 'shortId';
+    options = options || {};
+    var realPath = options.real || '_id';
+    var virtualPath = options.virtual || 'shortId';
 
-  schema.virtual(virtualPath)
-    .get(function () {
-      DEBUG && debug('get shortId for', this[realPath]);
-      return encodeObjectId(String(this[realPath]));
-    })
-    .set(function (shortId) {
-      DEBUG && debug('set shortId for', shortId);
-      this[realPath] = mongoose.Types.ObjectId.createFromHexString(decodeObjectId(shortId));
-    });
+    schema.virtual(virtualPath)
+        .get(function () {
+            DEBUG && debug('get shortId for', this[realPath]);
+            return encodeObjectId(String(this[realPath]));
+        })
+        .set(function (shortId) {
+            DEBUG && debug('set shortId for', shortId);
+            this[realPath] = mongoose.Types.ObjectId.createFromHexString(decodeObjectId(shortId));
+        });
 }
 
 module.exports = mongooseShortId;

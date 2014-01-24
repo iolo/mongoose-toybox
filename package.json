@@ -1,30 +1,31 @@
 {
-  "name": "mongoose-toybox",
-  "version": "0.0.1",
-  "description": "My Own Extra Stuff for Mongoose",
-  "author": "Dongsu Jang <iolothebard@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git://git@github.com/iolo/mongoose-toybox.git"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": "~0.10"
-  },
-  "dependencies": {
-    "q": "~0.9.7",
-    "mongoose": "~3.8.3",
-    "debug": "latest"
-  },
-  "devDependencies": {
-    "nodeunit": "latest",
-    "pow-mongodb-fixtures": "latest",
-    "grunt": "latest",
-    "grunt-contrib-jshint": "latest",
-    "grunt-contrib-nodeunit": "latest"
-  },
-  "directories": {
-    "lib": "./lib"
-  },
-  "main": "./lib/mongoose_toybox"
+    "name": "mongoose-toybox",
+    "version": "0.0.1",
+    "description": "My Own Extra Stuff for Mongoose",
+    "author": "Dongsu Jang <iolothebard@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "git://git@github.com/iolo/mongoose-toybox.git"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": "~0.10"
+    },
+    "dependencies": {
+        "q": "latest",
+        "mongoose": "latest",
+        "debug": "latest",
+        "node-toybox": "latest"
+    },
+    "devDependencies": {
+        "nodeunit": "latest",
+        "pow-mongodb-fixtures": "latest",
+        "grunt": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-nodeunit": "latest"
+    },
+    "directories": {
+        "lib": "./libs"
+    },
+    "main": "./index"
 }

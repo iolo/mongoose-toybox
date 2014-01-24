@@ -1,1 +1,1 @@
-module.exports = require('./libs/mongoose_toybox');
+module.exports = require('./libs');

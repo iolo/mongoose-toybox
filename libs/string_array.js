@@ -1,29 +1,7 @@
 'use strict';
 
-/**
- *
- * @param {Array.<string>} tags
- * @param {string} [separator=',']
- * @returns {string}
- */
-function joinTags(tags, separator) {
-  return tags ? tags.join(separator || ',') : '';
-}
-
-/**
- *
- * @param {string} tags
- * @param {string} [separator=',']
- * @returns {Array.<string>}
- */
-function splitTags(tags, separator) {
-  if (!tags) {
-    return [];
-  }
-  return tags.split(separator || ',').map(function (tag) {
-    return tag.trim();
-  });
-}
+var
+    utils = require('node-toybox').utils;
 
 /**
  * mongoose plugin to add virtual field to set/get string array field at once.
@@ -32,21 +10,20 @@ function splitTags(tags, separator) {
  * @param {{real:string,virtual:string,separator:string}} [options={}]
  */
 function mongooseStringArray(schema, options) {
-  options = options || {};
-  var realPath = options.real || 'tags';
-  var virtualPath = options.virtual || 'tagsAll';
-  var separator = options.separator || ',';
-
-  schema.virtual(virtualPath)
-    .get(function () {
-      return joinTags(this[realPath], separator);
-    })
-    .set(function (virtualValue) {
-      this[realPath] = splitTags(virtualValue);
-      this.markModified(realPath);
+    options = _.merge(options, {
+        real: 'tags',
+        virtual: 'tagsAll',
+        separator: ','
     });
+
+    schema.virtual(options.virtual)
+        .get(function () {
+            return utils.join(this[options.real], options.separator);
+        })
+        .set(function (virtualValue) {
+            this[options.real] = utils.split(virtualValue, options.separator);
+            this.markModified(options.real);
+        });
 }
 
 module.exports = mongooseStringArray;
-module.exports.joinTags = joinTags;
-module.exports.splitTags = splitTags;
